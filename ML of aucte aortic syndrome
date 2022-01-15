@@ -1,0 +1,12 @@
+#数据因子化
+mydata1117<-dplyr::mutate_at(X_DATA_2021_07_20_08_11_17_, .vars = vars(5,7,13,18:111,114:116,118,123,124:140,186:235,241:243,248:288,291:292), .fun = function(x) factor(x))
+#基线资料
+descrTable(gender~.,mydata1117,method=c(temperature=NA,hr=NA,rr=NA,left_systolic_bp=NA,left_diastolic_bp=NA,abg_paco2=NA,abg_pao2=NA,abg_sao2=NA,abg_lac=NA,wbc=NA,plt=NA,hg=NA,neutrophli=NA,lymphocte=NA,crp=NA,hs_crp=NA,pct=NA,interleukin_6=NA,esc=NA,ckmb=NA,ckmb_2=NA,ck=NA,tbil=NA,alt=NA,ast=NA,ldh=NA,scr=NA,uric_acid=NA,bun=NA,alb=NA,globulin=NA,triglyceride=NA,total_cholesterol=NA,ldl=NA,hdl=NA,pt=NA,pta=NA,inr=NA,fib=NA,fdp_mg_I=NA,aptt=NA,tt=NA,d_dimer_mg_I=NA,ctnt=NA,ctni=NA,bnp=NA,bnp2=NA,hba1c=NA,homocysteine=NA))
+#写出到word
+export2word(table1, file='table1.docx')
+#数据处理：缺失值查找
+install.packages("dlookr") 
+install.packages("palmerpenguins")
+library(dlookr)
+library(palmerpenguins)
+diagnose(data)
