@@ -1,1 +1,67 @@
 # 数据集整理（1088个验证集，包含D-Dimer）
+# lasso(1088验证集)
+library(readxl)
+library(tidyverse)
+library(lubridate)
+library(compareGroups)
+library(pROC)
+library(performance)
+library(see)
+library(ggplot2)
+library(rms)
+library(plyr)
+library(randomForest)
+library(glmnet)
+library(lars)
+
+data <- read.csv("C:/Users/wangdaidai/Desktop/DP/ML/建模及验证组填补后数据/completemydata5/completemydata15.csv")
+bc<-data
+bc<-na.omit(bc)
+x<-data.matrix(bc[,c(2:58)])
+y<-data.matrix(bc[,59])
+
+lar1 <-lars(x,y,type = "lasso")
+plot(lar1) 
+summary(lar1)
+lar1$Cp[which.min(lar1$Cp)] 
+lar1$beta
+
+
+coef <-coef.lars(lar1,mode="step",s=23)
+coef[coef!=0] 
+
+
+
+
+f1 = glmnet(x, y, family="binomial", nlambda=100, alpha=1)
+
+plot(f1)
+cvfit=cv.glmnet(x,y)
+plot(cvfit)
+
+
+cvfit$lambda.1se
+cvfit$lambda.min
+
+se<- cvfit$lambda.1se
+min<- cvfit$lambda.min
+
+l.coefse<-coef(cvfit$glmnet.fit,s=se,exact = F)
+l.coefmin<-coef(cvfit$glmnet.fit,s=min,exact = F)
+
+se
+min
+l.coefse
+l.coefmin
+
+# 从1088数据集中挑出929数据集
+setwd("C:/Users/wangdaidai/Desktop/DP/ML/建模及验证组填补后数据/completemydata5")
+people929<-read.csv("mydatapeople929.csv")
+completemydata15<-read.csv("completemydata15.csv")
+completemydata15_2<-merge(people929,completemydata15,by="record_id")
+write.csv(completemydata15_2, file = "completemydata15_2.csv")
+
+
+
+
+
