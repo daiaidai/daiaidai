@@ -17,8 +17,8 @@ library(lars)
 data <- read.csv("C:/Users/wangdaidai/Desktop/DP/ML/建模及验证组填补后数据/completemydata5/completemydata15.csv")
 bc<-data
 bc<-na.omit(bc)
-x<-data.matrix(bc[,c(2:58)])
-y<-data.matrix(bc[,59])
+x<-data.matrix(bc[,c(2:57)])
+y<-data.matrix(bc[,58])
 
 lar1 <-lars(x,y,type = "lasso")
 plot(lar1) 
