@@ -68,6 +68,8 @@ library(compareGroups)
 table_bysydata5_2<-descrTable(death_whether~.,data=bysydata5_2,method=c(age.x=NA,left_systolic_bp=NA,wbc.x=NA,neutrophli.x=NA,lymphocyte.xp=NA,scr.x=NA,plt.x=NA,pt.x=NA,inr.x=NA,aptt.x=NA,hr=NA,weight=NA,high=NA,hg=NA,ckmb=NA,hs_crp=NA,pct=NA,interleukin_6=NA,esc=NA,ck=NA,tbil=NA,alt=NA,ast=NA,ldh=NA,bun=NA,pta=NA,fib=NA,fdp=NA,tt=NA,d_dimer_mg_l=NA,d_dimer=NA,hospital_stays=NA),show.all = TRUE)
 export2word(table_bysydata5_2,file="table_bysydata5_2.docx")
 
+# 郑大一附院+新疆自治区人民医院基线资料
+mydata2.5_jixian<-mydata2.5[c("record_id","age","gender","diagnose","Stanford_type","hypertension","diabetes","hlp","ckd","ckd","chd","cvd","smoke","high_risk_factor_new___1","high_risk_factor_new___7","aortic_disease_type___1","misdiagnosis","surgery_all","consciousness1","left_systolic_bp","hr","pain","pain_location___1","pain_location___2","pain_location___3","pain_location___4","circulation_system___1","circulation_system___2","circulation_system___3","respiratory_system___2","digestive_system___1","digestive_system___2","digestive_system___3","cns___1","cns___2","cns___3","cns___6","cns___7","peripheral_artery_pulsation","cardiac_murmur","heart_sound","abdomil_tenderness","gurgling_sound","wbc","neutrophli","lymphocyte","plt","hg","alt","ast","scr","uric_acid","pt","inr","aptt","d_dimer_mg_l","cta_lesion___12","cta_lesion___1","cta_lesion___2","cta_lesion___3","cta_lesion___4","cta_lesion___5","cta_lesion___6","cta_lesion___7","cta_lesion___8","cta_lesion___9","cta_lesion___11","organ_involved___1","organ_involved___2","organ_involved___3","organ_involved___4","bleed_cta","pleural_effusion","cta_pericardial_effusion","death_whether")]
 
 
 
