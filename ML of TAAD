@@ -71,6 +71,14 @@ export2word(table_bysydata5_2,file="table_bysydata5_2.docx")
 # 郑大一附院+新疆自治区人民医院基线资料
 mydata2.5_jixian<-mydata2.5[c("record_id","age","gender","diagnose","Stanford_type","hypertension","diabetes","hlp","ckd","ckd","chd","cvd","smoke","high_risk_factor_new___1","high_risk_factor_new___7","aortic_disease_type___1","misdiagnosis","surgery_all","consciousness1","left_systolic_bp","hr","pain","pain_location___1","pain_location___2","pain_location___3","pain_location___4","circulation_system___1","circulation_system___2","circulation_system___3","respiratory_system___2","digestive_system___1","digestive_system___2","digestive_system___3","cns___1","cns___2","cns___3","cns___6","cns___7","peripheral_artery_pulsation","cardiac_murmur","heart_sound","abdomil_tenderness","gurgling_sound","wbc","neutrophli","lymphocyte","plt","hg","alt","ast","scr","uric_acid","pt","inr","aptt","d_dimer_mg_l","cta_lesion___12","cta_lesion___1","cta_lesion___2","cta_lesion___3","cta_lesion___4","cta_lesion___5","cta_lesion___6","cta_lesion___7","cta_lesion___8","cta_lesion___9","cta_lesion___11","organ_involved___1","organ_involved___2","organ_involved___3","organ_involved___4","bleed_cta","pleural_effusion","cta_pericardial_effusion","death_whether")]
 
+3.11重新整理
+# 根据单因素回归+临床与预后相关的结果，确定建模参数，并从 “completemydata8_dimer_1.csv”中筛出共36个参数。
+> data <- read.csv("C:/Users/wangdaidai/Desktop/DP/ML/建模及验证组填补后数据/data_before_lasso/completemydata8_dimer_1.csv")
+> data_before_lasso<-data[c("age","diagnose","stanford_type","consciousness1","left_systolic_bp","pain_location___1","pain_location___3","pain_location___4","circulation_system___1","circulation_system___2","circulation_system___3","respiratory_system___2","digestive_system___1","digestive_system___2","cns___1","cns___3","cns___6","peripheral_artery_pulsation","gurgling_sound","wbc","neutrophli","scr","pt","inr","aptt","d_dimer_mg_l","cta_lesion___1","cta_lesion___2","cta_lesion___4","cta_lesion___5","cta_lesion___6","cta_lesion___8","organ_involved___1","bleed_cta","pleural_effusion","cta_pericardial_effusion","death_whether")]
+> write.csv(data_before_lasso, file = "data_before_lasso.csv")
+
+# 对data_before_lasso行lasso分析：
 
 
+# 对36个参数的数据进行机器学习建模：
 
