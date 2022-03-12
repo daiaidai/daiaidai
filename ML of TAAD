@@ -77,8 +77,20 @@ mydata2.5_jixian<-mydata2.5[c("record_id","age","gender","diagnose","Stanford_ty
 > data_before_lasso<-data[c("age","diagnose","stanford_type","consciousness1","left_systolic_bp","pain_location___1","pain_location___3","pain_location___4","circulation_system___1","circulation_system___2","circulation_system___3","respiratory_system___2","digestive_system___1","digestive_system___2","cns___1","cns___3","cns___6","peripheral_artery_pulsation","gurgling_sound","wbc","neutrophli","scr","pt","inr","aptt","d_dimer_mg_l","cta_lesion___1","cta_lesion___2","cta_lesion___4","cta_lesion___5","cta_lesion___6","cta_lesion___8","organ_involved___1","bleed_cta","pleural_effusion","cta_pericardial_effusion","death_whether")]
 > write.csv(data_before_lasso, file = "data_before_lasso.csv")
 
+
+# 对36个参数的数据进行机器学习建模：
+
 # 对data_before_lasso行lasso分析：
 
 
-# 对36个参数的数据进行机器学习建模：
+# 提取lasso分析后，最小λ中的8个变量：
+data <- read.csv("C:/Users/wangdaidai/Desktop/DP/ML/建模及验证组填补后数据/3.11/model1_xjzd.csv")
+data_simple<-data[c("stanford_type","pain_location___3","cns___3","peripheral_artery_pulsation","gurgling_sound","aptt","organ_involved___1","cta_pericardial_effusion")]
+write.csv(data_simple, file = "data_simple.csv")
+
+
+
+
+
+
 
