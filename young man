@@ -1,0 +1,46 @@
+library(readxl)
+library(tidyverse)
+library(lubridate)
+library(compareGroups)
+library(pROC)
+library(performance)
+library(see)
+library(ggplot2)
+library(rms)
+library(plyr)
+library(randomForest)
+library(glmnet)
+model6_all_young_patients<-read.xlsx("model6_all_young_patients.xlsx")
+young_all<-dplyr::mutate_at(model6_all_young_patients, .vars = vars(2:4,6:18,25:34), .fun = as.character)
+mydata<-young_all
+mydata$outcome<-mydata$death_whether
+
+nn=0.7
+data=mydata
+length(mydata[,1])
+sub<-sample(1:nrow(data),round(nrow(data)*nn))
+length(sub)
+data_train<-mydata[sub,]#取0.7的数据做训练集
+data_test<-mydata[-sub,]#取0.3的数据做测试集
+dim(data_train)#训练集行数和列数
+dim(data_test) #测试集的行数和列数
+
+f_lrm <-glm(outcome~age+diagnose+stanford_type+consciousness1+left_systolic_bp+pain_location___1+pain_location___4+circulation_system___1+circulation_system___2+digestive_system___2+cns___1+cns___3+cns___6+peripheral_artery_pulsation+gurgling_sound+wbc+neutrophli+scr+pt+inr+cta_lesion___1+cta_lesion___2+cta_lesion___4+cta_lesion___5+cta_lesion___6+cta_lesion___8+organ_involved___1+bleed_cta+pleural_effusion+cta_pericardial_effusion,data=data_train,family=binomial(link="logit"),control=list(maxit=100))
+
+glm.probs <- predict(f_lrm,data_test,type="response")
+data_test$prob6 = glm.probs
+
+
+par(pty="s")
+roc1<- roc(outcome~glm.probs, data=data_test,
+           percent=TRUE,partial.auc=c(100, 90),
+           partial.auc.focus="sens",
+           ci=TRUE,plot=TRUE,
+           auc.polygon=TRUE,auc.polygon.col="#cb231360",max.auc.polygon=TRUE, grid=TRUE,
+           print.auc=TRUE, show.thres=TRUE,legacy.axes=TRUE,col="#cb2313",lwd=3
+)
+legend("bottomright",legend=c("Logistic Regression"),col=c("#cb2313"),lwd=4)
+ciobj <- ci.se(roc1,specificities = seq(0, 100, 5)) 
+plot(ciobj, type = "shape", col = "#efe7e222")  
+
+par(pty="m")
